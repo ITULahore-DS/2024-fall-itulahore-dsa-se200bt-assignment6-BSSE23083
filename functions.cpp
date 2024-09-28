@@ -7,6 +7,7 @@
 
 using namespace std;
 
+//Node Funcs
 Node::Node() {
     data = 0;
     next = nullptr;
@@ -37,6 +38,8 @@ int Node::getData() {
     return data;
 }
 
+
+//Stack Funcs
 Stack::Stack() {
     top = nullptr;
     count = 0;
@@ -47,7 +50,7 @@ Stack::~Stack() {
 }
 
 bool Stack::isEmpty() {
-    return top== nullptr;
+    return top == nullptr;
 }
 
 void Stack::push(int data) {
@@ -59,7 +62,7 @@ void Stack::push(int data) {
 
 void Stack::pop() {
     if (isEmpty()) {
-        cout<<"Stack is empty"<<endl;
+        cout << "Stack is empty" << endl;
     } else {
         Node *temp = top;
         top = top->next;
@@ -87,9 +90,82 @@ void Stack::clear() {
 
 void Stack::printStack() {
     Node *cur = top;
-    int i = count;
-    while (top) {
-        cout << "Data[" << i << "] : " << cur->data << endl;
-        i--;
+    int i = count-1;
+    if (cur == nullptr) {
+        cout << "Stack is empty" << endl;
+    } else {
+        while (cur != nullptr) {
+            cout << "Data[" << i << "] : " << cur->data << endl;
+            cur = cur->next;
+            i--;
+        }
     }
+}
+
+
+//Queue Funcs
+Queue::Queue() {
+    top = nullptr;
+    bottom = nullptr;
+    count = 0;
+}
+
+Queue::~Queue() {
+    while (!isEmpty()) {
+        dequeue();
+    }
+}
+
+bool Queue::isEmpty() { return count == 0; }
+
+void Queue::enqueue(int data) { //Insert at bottom
+    if (bottom == nullptr && top == nullptr) {
+        Node *n = new Node(data);
+        top = n;
+        bottom = n;
+    } else {
+        Node *n = new Node(data);
+        bottom->next = n;
+        bottom = n;
+    }
+    count++;
+}
+
+void Queue::dequeue() {
+    if (isEmpty()) {
+        cout << "Cannot Dequeue" << endl;
+    } else if (top == bottom) {
+        Node *temp = top;
+        delete temp;
+        top = nullptr;
+        bottom = nullptr;
+        count--;
+
+    } else {
+        Node *temp = top;
+        top = top->next;
+        delete temp;
+        count--;
+
+    }
+}
+
+int Queue::size() {
+    return count;
+}
+
+void Queue::printQueue() {
+    Node *temp = top;
+    int i = 0;
+    if(top== nullptr){
+        cout<<"Queue is empty"<<endl;
+    }else{
+        while (temp != bottom->next) { //or we can use nullptr
+            cout << "Queue[" << i << "]: " << temp->data << endl;
+            temp=temp->next;
+            i++;
+        }
+        cout<<"Size: "<<count<<endl;
+    }
+
 }

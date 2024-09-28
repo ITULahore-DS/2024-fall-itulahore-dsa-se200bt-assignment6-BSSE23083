@@ -39,20 +39,21 @@ public:
     void printStack();
 
 };
-//
-////Queue class
-//class Queue{
-//    Node* top;
-//    int count;
-//public:
-//    Queue();
-//    ~Queue();
-//    bool isEmpty();
-//    void enqueue(int data);
-//    void dequeue();
-//    int size();
-//    void printQueue();
-//};
-//
+
+//Queue class
+class Queue{
+    Node* top;
+    Node* bottom;
+    int count;
+public:
+    Queue();
+    ~Queue();
+    bool isEmpty();
+    void enqueue(int data);
+    void dequeue();
+    int size();
+    void printQueue();
+};
+
 
 #endif //INC_2024_FALL_ITULAHORE_DSA_SE200BT_ASSIGNMENT6_BSSE23083_FUNCTIONS_H
